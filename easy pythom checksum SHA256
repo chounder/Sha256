@@ -1,0 +1,22 @@
+import hashlib
+from tkinter import filedialog
+
+def get_file_checksum(filename):
+    with open(filename, 'rb') as f:
+        contents = f.read()
+        sha256 = hashlib.sha256()
+        sha256.update(contents)
+        return sha256.hexdigest()
+  # Erase the "#", to use the old method.
+#filename = input("insert a file name : ")
+
+filename = filedialog.askopenfilename()
+print(filename)
+checksum = get_file_checksum(filename)
+print('checksum (SHA-256): ', checksum)
+f2 = input("paste the checksum (SHA-256) of the website: ")
+if checksum == f2:
+    print("Safe")
+else:
+    print("Unsafe")
+input("Press <enter> to exit !")
